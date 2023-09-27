@@ -77,7 +77,7 @@ func (b *Broker) Start(binder func(s Server, r *mux.Router)) error {
 	}
 
 	// init abstract repository
-	repository.SetUserRepository(repo)
+	repository.SetRepository(repo)
 
 	// Loging server start
 	log.Println("Server started on port", b.config.Port)

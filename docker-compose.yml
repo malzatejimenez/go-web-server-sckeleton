@@ -11,3 +11,6 @@ services:
       - POSTGRES_DB=app_db
     ports:
       - 54321:5432
+    restart: always
+    volumes:
+      - ./_pg_data:/var/lib/postgresql/data

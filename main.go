@@ -61,4 +61,20 @@ func BindRoutes(s server.Server, r *mux.Router) {
 
 	// Bind Me handler
 	r.HandleFunc("/me", handlers.MeHandler(s)).Methods("GET")
+
+	// Bind ListCategories handler
+	r.HandleFunc("/categories", handlers.ListCategoriesHandler(s)).Methods("GET")
+
+	// Bind InsertCategory handler
+	r.HandleFunc("/categories", handlers.InsertCategoryHandler(s)).Methods("POST")
+
+	// Bind GetCategoryById handler
+	r.HandleFunc("/categories/{id:[0-9]+}", handlers.GetCategoryByIdHandler(s)).Methods("GET")
+
+	// Bind UpdateCategory handler
+	r.HandleFunc("/categories/{id:[0-9]+}", handlers.UpdateCategoryHandler(s)).Methods("PUT")
+
+	// Bind DeleteCategory handler
+	r.HandleFunc("/categories/{id:[0-9]+}", handlers.DeleteCategoryHandler(s)).Methods("DELETE")
+
 }

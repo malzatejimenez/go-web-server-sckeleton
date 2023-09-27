@@ -1,6 +1,6 @@
 FROM postgres:latest
 
-COPY up.sql /docker-entrypoint-initdb.d/1.sql
+COPY migrations/. /docker-entrypoint-initdb.d/
 
 CMD [ "postgres" ]
 

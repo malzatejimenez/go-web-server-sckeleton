@@ -13,7 +13,7 @@ type PostgresRepository struct {
 }
 
 // NewPostgresRepository is a function that returns a new PostgresRepository
-func NewPostgresRepository(url string) (repository.UserRepository, error) {
+func NewPostgresRepository(url string) (repository.Repository, error) {
 	// open the connection
 	db, err := sql.Open("postgres", url)
 	if err != nil {

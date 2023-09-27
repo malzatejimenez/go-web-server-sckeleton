@@ -8,9 +8,9 @@ import (
 )
 
 // InsertUser is a method that inserts a user into the database
-func (repo *PostgresRepository) InsertUser(ctx context.Context, user *models.User) error {
+func (r *PostgresRepository) InsertUser(ctx context.Context, user *models.User) error {
 	// execute the query
-	_, err := repo.db.ExecContext(ctx, "INSERT INTO users (id, email, password) VALUES ($1, $2, $3)", user.Id, user.Email, user.Password)
+	_, err := r.db.ExecContext(ctx, "INSERT INTO users (id, email, password) VALUES ($1, $2, $3)", user.Id, user.Email, user.Password)
 
 	// check if there was an error
 	if err != nil {
@@ -22,9 +22,9 @@ func (repo *PostgresRepository) InsertUser(ctx context.Context, user *models.Use
 }
 
 // GetUserById is a method that returns a user from the database
-func (repo *PostgresRepository) GetUserById(ctx context.Context, id string) (*models.User, error) {
+func (r *PostgresRepository) GetUserById(ctx context.Context, id string) (*models.User, error) {
 	// execute the query
-	rows, err := repo.db.QueryContext(ctx, "SELECT id, email, password FROM users WHERE id = $1", id)
+	rows, err := r.db.QueryContext(ctx, "SELECT id, email, password FROM users WHERE id = $1", id)
 
 	// check if there was an error
 	if err != nil {
@@ -45,9 +45,9 @@ func (repo *PostgresRepository) GetUserById(ctx context.Context, id string) (*mo
 }
 
 // GetUserByEmail is a method that returns a user from the database
-func (repo *PostgresRepository) GetUserByEmail(ctx context.Context, email string) (*models.User, error) {
+func (r *PostgresRepository) GetUserByEmail(ctx context.Context, email string) (*models.User, error) {
 	// execute the query
-	rows, err := repo.db.QueryContext(ctx, "SELECT id, email, password FROM users WHERE email = $1", email)
+	rows, err := r.db.QueryContext(ctx, "SELECT id, email, password FROM users WHERE email = $1", email)
 
 	// check if there was an error
 	if err != nil {
