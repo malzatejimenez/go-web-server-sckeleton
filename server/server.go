@@ -10,6 +10,7 @@ import (
 	"platzi/go/rest-ws/repository"
 
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
 
 // Config is the server config struct
@@ -70,6 +71,9 @@ func (b *Broker) Start(binder func(s Server, r *mux.Router)) error {
 	// Bind the router
 	binder(b, b.router)
 
+	// implement cors
+	handler := cors.AllowAll().Handler(b.router)
+
 	// init repository
 	repo, err := postgres.NewPostgresRepository(b.config.DatabaseURL)
 	if err != nil {
@@ -83,7 +87,7 @@ func (b *Broker) Start(binder func(s Server, r *mux.Router)) error {
 	log.Println("Server started on port", b.config.Port)
 
 	// Start the server
-	if err := http.ListenAndServe(b.config.Port, b.router); err != nil {
+	if err := http.ListenAndServe(b.config.Port, handler); err != nil {
 		log.Fatal("ListenAndServe", err)
 		return err
 	}

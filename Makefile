@@ -7,4 +7,5 @@ install-deps:
 	go get github.com/segmentio/ksuid
 	go get golang.org/x/crypto/bcrypt
 	go get github.com/golang-jwt/jwt
+	go get github.com/rs/cors
 
